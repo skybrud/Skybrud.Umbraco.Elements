@@ -32,10 +32,12 @@ namespace Skybrud.Umbraco.Elements {
                 case "Skybrud.Umbraco.Elements":
                 case "Skybrud.Umbraco.Elements.List":
                 case "Skybrud.Umbraco.Elements.Multiple":
+                    if (string.IsNullOrWhiteSpace(strValue)) return new IPublishedElement[0];
                     JArray array = JsonUtils.ParseJsonArray(strValue);
                     return helper.ParseElements(array);
 
                 case "Skybrud.Umbraco.Elements.Element":
+                    if (string.IsNullOrWhiteSpace(strValue)) return null;
                     JObject obj = JsonUtils.ParseJsonObject(strValue);
                     return helper.ParseElement(obj);
 
