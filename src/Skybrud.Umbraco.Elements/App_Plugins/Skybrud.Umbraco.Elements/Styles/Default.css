@@ -1,0 +1,120 @@
+﻿.skybrud-content-type-picker .umb-child-selector__children-container {
+  margin-left: 0;
+}
+.hejsan .image {
+  position: relative;
+  width: 250px;
+  height: 175px;
+  background: #F6F4F4;
+}
+.hejsan .image .actions {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  opacity: 0;
+  visibility: hidden;
+}
+.hejsan .image .action {
+  font-size: 16px;
+  background: #fff;
+  height: 25px;
+  width: 25px;
+  border-radius: 15px;
+  color: #1e1c1c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+  text-decoration: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+.hejsan .image .action.-red {
+  color: #d42054;
+}
+.hejsan .image:hover .actions {
+  opacity: 1;
+  visibility: visible;
+}
+/*
+
+                
+            
+            <div class="image" ng-if="images[item.key]">
+                <img ng-src="{{images[item.key].cropUrl}}" alt="" /><br />
+                <div class="actions">
+                    <a class="action" data-element="action-edit" href="/umbraco/#/media/media/edit/{{images[item.key].id}}">
+                        <i class="icon icon-edit"></i>
+                    </a>
+                    <a href="#" class="action -red" ng-click="removeImage(item)" prevent-default>
+                        <i class="icon icon-delete"></i>
+                    </a>
+                </div>
+            </div>
+
+            
+
+*/
+.skybrud-inner-content-add {
+  display: flex;
+  margin-top: 10px;
+  margin: 10px -5px 0 -5px;
+  /*a:first-child:not(:last-child) {
+        margin: 0 5px 0 0;
+    }
+
+    a:last-child:not(:first-child) {
+        margin: 0 0 0 5px;
+    }*/
+}
+.skybrud-inner-content-add a {
+  display: -ms-flexbox;
+  display: flex;
+  padding: 5px 15px;
+  font-weight: bold;
+  color: #00aea2;
+  border: 1px dashed #d8d7d9;
+  box-sizing: border-box;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  flex: 1;
+  margin: 0 5px;
+}
+.skybrid-inner-content-element .--element {
+  position: relative;
+}
+.skybrid-inner-content-element .--preview {
+  cursor: pointer;
+  padding: 25px;
+  border: 1px dashed #bbbabf;
+  background: #F8F8F8;
+}
+.skybrid-inner-content-element .--preview i.icon {
+  font-size: 46px;
+  margin-bottom: 15px;
+  display: block;
+}
+.skybrid-inner-content-element .--preview strong {
+  font-size: 12px;
+}
+.skybrid-inner-content-element .--actions {
+  display: none;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  font-size: 12px;
+  line-height: 12px;
+}
+.skybrid-inner-content-element .skybrud-inner-content-add {
+  margin: 0;
+}
+.umb-control.-active .skybrid-inner-content-element {
+  padding: 10px;
+}
+.umb-control.-active .skybrid-inner-content-element .--actions {
+  display: block;
+}

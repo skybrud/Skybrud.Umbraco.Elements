@@ -1,0 +1,20 @@
+﻿<div class="skybrud-content-type-picker" ng-controller="Skybrud.Umbraco.Elements.ContentTypePicker.Controller">
+    <div class="umb-child-selector__children-container">
+        <div class="umb-child-selector__child" ng-repeat="item in selected">
+            <div class="umb-child-selector__child-description">
+                <div class="umb-child-selector__child-icon-holder">
+                    <i class="umb-child-selector__child-icon {{ item.icon }}"></i>
+                </div>
+                <span class="umb-child-selector__child-name">
+                    {{ item.name }}
+                </span>
+            </div>
+            <div class="umb-child-selector__child-actions">
+                <i class="umb-child-selector__child-remove icon-trash" ng-click="removeItem($index)"></i>
+            </div>
+        </div>
+        <a href="" class="umb-child-selector__child -placeholder" ng-click="addItem()" hotkey="alt+shift+c">
+            <div class="umb-child-selector__child-name -blue"><strong>Add content type</strong></div>
+        </a>
+    </div>
+</div>

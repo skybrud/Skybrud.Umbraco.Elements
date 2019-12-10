@@ -1,0 +1,21 @@
+﻿<div class="skybrid-elements-element">
+    <div ng-show="value" class="--element">
+        <div class="--preview" ng-click="editItem()">
+            <div style="text-align: center;">
+                <i class="icon {{contentType.icon}}"></i>
+                <strong>
+                    {{contentType.name}}
+                </strong>
+            </div>
+            <div class="--actions">
+                <!--<a href="#" prevent-default ng-click="editItem()">Rediger</a>-->
+                <a href="#" class="-red" prevent-default ng-click="removeItem()">Fjern</a>
+            </div>
+        </div>
+    </div>
+    <div class="skybrud-elements-add" ng-show="!value">
+        <a ng-repeat="ct in contentTypes" href="" class="umb-child-selector__child -placeholder" ng-click="addItem(ct, null, true)">
+            <div class="umb-child-selector__child-name -blue"><strong>Tilføj {{ct.name}}</strong></div>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+﻿<div>
+    <div>
+        <div ng-repeat="item in value" style="margin-bottom: 10px; padding: 5px; border: 1px dashed #bbbabf;">
+            <div style="display: flex;">
+                <div style="flex: 1;">
+                    Item {{$index + 1}} - {{getContentType(item.contentType).name}}
+                </div>
+                <div>
+                    <a href="#" prevent-default ng-click="editItem(item)">Rediger</a>
+                    <a href="#" class="-red" prevent-default ng-click="removeItem($index)">Fjern</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="skybrud-elements-add">
+        <a ng-repeat="ct in contentTypes" href="" class="umb-child-selector__child -placeholder" ng-click="addItem(ct, null, true)">
+            <div class="umb-child-selector__child-name -blue"><strong>Tilføj {{ct.name}}</strong></div>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Version>1.0.0-alpha004</Version>
+    <Authors>Anders Bjerner</Authors>
+    <Copyright>Copyright © 2019</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Skybrud.Essentials" Version="1.1.17" />
+    <PackageReference Include="Skybrud.Umbraco.GridData" Version="3.0.0-beta003" />
+    <PackageReference Include="Skybrud.WebApi.Json" Version="1.0.4" />
+    <PackageReference Include="UmbracoCms.Web" Version="8.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="App_Plugins\Skybrud.Umbraco.Elements\**\*.js" />
+    <Content Include="App_Plugins\Skybrud.Umbraco.Elements\**\*.css" />
+    <Content Include="App_Plugins\Skybrud.Umbraco.Elements\**\*.html" />
+    <Content Include="App_Plugins\Skybrud.Umbraco.Elements\package.manifest" />
+    <Content Include="App_Plugins\Skybrud.Umbraco.Elements\Styles\Default.less" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="App_Plugins\Skybrud.Umbraco.Elements\Styles\Default.css">
+      <DependentUpon>Default.less</DependentUpon>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="App_Plugins\Skybrud.Umbraco.Elements\Styles\Default.min.css">
+      <DependentUpon>Default.css</DependentUpon>
+    </Content>
+  </ItemGroup>
+
+</Project>
