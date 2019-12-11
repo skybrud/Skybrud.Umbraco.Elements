@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json;
 using Umbraco.Core.Models.PublishedContent;
@@ -32,14 +33,10 @@ namespace Skybrud.Umbraco.Elements {
                 case "Skybrud.Umbraco.Elements":
                 case "Skybrud.Umbraco.Elements.List":
                 case "Skybrud.Umbraco.Elements.Multiple":
-                    if (string.IsNullOrWhiteSpace(strValue)) return new IPublishedElement[0];
-                    JArray array = JsonUtils.ParseJsonArray(strValue);
-                    return helper.ParseElements(array);
+                    return helper.Deserialize(strValue);
 
                 case "Skybrud.Umbraco.Elements.Element":
-                    if (string.IsNullOrWhiteSpace(strValue)) return null;
-                    JObject obj = JsonUtils.ParseJsonObject(strValue);
-                    return helper.ParseElement(obj);
+                    return helper.Deserialize(strValue)?.FirstOrDefault();
 
                 default:
                     return typeof(object);

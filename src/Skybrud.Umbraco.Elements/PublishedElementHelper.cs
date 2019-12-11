@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Umbraco.Elements.Exceptions;
 using Skybrud.Umbraco.Elements.Models;
 using Umbraco.Core;
 using Umbraco.Core.Composing;
@@ -12,8 +15,10 @@ using Umbraco.Core.Models.Editors;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Core.PropertyEditors;
 using Umbraco.Core.Services;
+// ReSharper disable PossibleInvalidCastExceptionInForeachLoop
 
 namespace Skybrud.Umbraco.Elements {
+
     public class PublishedElementHelper : IPublishedElementHelper {
 
         private readonly IContentTypeService _contentTypeService;
@@ -48,11 +53,37 @@ namespace Skybrud.Umbraco.Elements {
 
         //}
 
-        public IPublishedElement ParseElement(JObject obj) {
+        public virtual IPublishedElement[] Deserialize(string str) {
+
+            if (string.IsNullOrWhiteSpace(str)) return new IPublishedElement[0];
+
+            // JSON.net is automatically parsing strings that look like dates into in actual dates so that we can't
+            // really read as strings without some localization going on. Since this is kinda annoying an we don't
+            // really need it, we can luckily disable it with the lines below
+            JToken token = JToken.Load(new JsonTextReader(new StringReader(str)) {
+                DateParseHandling = DateParseHandling.None
+            });
+
+            switch (token) {
+
+                case JArray array:
+                    return ParseElements(array);
+
+                case JObject obj:
+                    return ParseElements(new JArray(obj));
+
+                default:
+                    throw new ElementsException("Unsupported token type: " + token.Type);
+
+            }
+
+        }
+
+        public virtual IPublishedElement ParseElement(JObject obj) {
             return ParseElements(new JArray(obj))[0];
         }
 
-        public IPublishedElement[] ParseElements(JArray array) {
+        public virtual IPublishedElement[] ParseElements(JArray array) {
 
             List<IPublishedElement> items = new List<IPublishedElement>();
 
@@ -80,13 +111,13 @@ namespace Skybrud.Umbraco.Elements {
                     // Get a reference to the property type
                     IPublishedPropertyType type = pct.GetPropertyType(prop.Name);
                     if (type == null) {
-                        _logger.Error(typeof(PublishedElementHelper), $"Property type for property with alias {prop.Name} not found. (" + pct.Alias + ")");
+                        _logger.Error<PublishedElementHelper>("Property type for property with alias {Alias} not found.", prop.Name);
                         continue;
                     }
 
                     // Get a reference to the property editor
                     if (_propertyEditors.TryGet(type.EditorAlias, out IDataEditor propEditor) == false) {
-                        _logger.Error(typeof(PublishedElementHelper), $"Property editor with alias {type.EditorAlias} not found.");
+                        _logger.Error<PublishedElementHelper>("Property editor with alias {Alias} not found.", type.EditorAlias);
                         continue;
                     }
 
@@ -98,15 +129,10 @@ namespace Skybrud.Umbraco.Elements {
                     object newValue = prop.Value == null ? null : propEditor.GetValueEditor().FromEditor(contentPropData, prop.Value);
 
                     PropertyType propType2;
-
-                    try
-                    {
-                        propType2 = contentType.CompositionPropertyTypes.First(x =>
-                            x.PropertyEditorAlias.InvariantEquals(type.DataType.EditorAlias));
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new Exception("unable to find propertyeditor w. alias: " + type.DataType.EditorAlias + " (" + type.DataType.Id + ")", ex);
+                    try {
+                        propType2 = contentType.CompositionPropertyTypes.First(x => x.PropertyEditorAlias.InvariantEquals(type.DataType.EditorAlias));
+                    } catch (Exception ex) {
+                        throw new ElementsException($"Unable to find property editor with alias: {type.DataType.EditorAlias} (" + type.DataType.Id + ")", ex);
                     }
 
 
