@@ -80,7 +80,7 @@ namespace Skybrud.Umbraco.Elements {
                     // Get a reference to the property type
                     IPublishedPropertyType type = pct.GetPropertyType(prop.Name);
                     if (type == null) {
-                        _logger.Error(typeof(PublishedElementHelper), $"Property type for property with alias {prop.Name} not found.");
+                        _logger.Error(typeof(PublishedElementHelper), $"Property type for property with alias {prop.Name} not found. (" + pct.Alias + ")");
                         continue;
                     }
 
@@ -97,7 +97,18 @@ namespace Skybrud.Umbraco.Elements {
 
                     object newValue = prop.Value == null ? null : propEditor.GetValueEditor().FromEditor(contentPropData, prop.Value);
 
-                    PropertyType propType2 = contentType.CompositionPropertyTypes.First(x => x.PropertyEditorAlias.InvariantEquals(type.DataType.EditorAlias));
+                    PropertyType propType2;
+
+                    try
+                    {
+                        propType2 = contentType.CompositionPropertyTypes.First(x =>
+                            x.PropertyEditorAlias.InvariantEquals(type.DataType.EditorAlias));
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception("unable to find propertyeditor w. alias: " + type.DataType.EditorAlias + " (" + type.DataType.Id + ")", ex);
+                    }
+
 
                     Property prop2 = null;
                     try {
