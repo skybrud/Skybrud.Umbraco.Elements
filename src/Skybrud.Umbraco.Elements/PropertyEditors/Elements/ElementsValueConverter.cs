@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Linq;
-using Newtonsoft.Json.Linq;
-using Skybrud.Essentials.Json;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Core.PropertyEditors;
 
-namespace Skybrud.Umbraco.Elements {
+namespace Skybrud.Umbraco.Elements.PropertyEditors.Elements {
 
-    public class PublishedElementValueConverter : PropertyValueConverterBase {
+    public class ElementsValueConverter : PropertyValueConverterBase {
 
         //private readonly IPublishedElementHelper _helper;
 
