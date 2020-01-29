@@ -55,6 +55,7 @@
     // Opens up a new picker for adding an additional content type
     $scope.addItem = function () {
         editorService.itemPicker({
+            title: "Select element type",
             availableItems: $scope.contentTypes,
             selectedItems: $scope.selected,
             submit: function (model) {
