@@ -7,6 +7,10 @@
                 </div>
                 <span class="umb-child-selector__child-name">
                     {{ item.name }}
+                    <span ng-if="!item.isElement" style="color: #D42054; float: right;">
+                        <i class="icon icon-alert"></i>
+                        Not an element type!
+                    </span>
                 </span>
             </div>
             <div class="umb-child-selector__child-actions">
