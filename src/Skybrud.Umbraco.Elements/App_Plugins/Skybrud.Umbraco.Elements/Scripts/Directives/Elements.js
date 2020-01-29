@@ -60,8 +60,8 @@
                 scope.config.allowedTypes.forEach(function (item) {
                     if (typeof item === "string") return;
                     var ct = scope.contentTypesLookup[item.key];
-                    if (ct && ct.settings) {
-                        ct.settings = item.settings;
+                    if (ct) {
+                        ct.settings = item.settings || {};
                         if (ct.settings.nameTemplate) ct.nameExp = $interpolate(ct.settings.nameTemplate);
                     }
                 });
