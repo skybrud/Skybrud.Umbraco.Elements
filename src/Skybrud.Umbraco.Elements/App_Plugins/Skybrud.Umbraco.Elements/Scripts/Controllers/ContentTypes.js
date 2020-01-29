@@ -28,7 +28,7 @@
 
             // Append to selected items if found
             if (ct) {
-                ct.elementsSettings = item.settings || {};
+                ct.elementsSettings = item.config || item.settings || {};
                 $scope.selected.push(ct);
             }
 
@@ -44,7 +44,7 @@
         $scope.selected.forEach(function (ct) {
             temp.push({
                 key: ct.key,
-                settings: ct.elementsSettings
+                config: ct.elementsSettings
             });
         });
 
@@ -97,7 +97,7 @@
         ];
 
         editorService.open({
-            title: "Edit element",
+            title: "Configuration",
             view: "/App_Plugins/Skybrud.Umbraco.Elements/Views/Properties.html",
             size: "small",
             properties: properties,

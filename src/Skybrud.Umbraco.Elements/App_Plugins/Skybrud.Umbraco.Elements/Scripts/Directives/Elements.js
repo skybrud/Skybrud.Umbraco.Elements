@@ -61,8 +61,8 @@
                     if (typeof item === "string") return;
                     var ct = scope.contentTypesLookup[item.key];
                     if (ct) {
-                        ct.settings = item.settings || {};
-                        if (ct.settings.nameTemplate) ct.nameExp = $interpolate(ct.settings.nameTemplate);
+                        ct.config = item.settings || {};
+                        if (ct.config.nameTemplate) ct.nameExp = $interpolate(ct.config.nameTemplate);
                     }
                 });
 

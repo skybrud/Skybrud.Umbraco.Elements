@@ -2,7 +2,7 @@
     <div>
         <div class="skybrud-elements-items">
             <div ng-repeat="item in items" class="skybrud-elements-item">
-                <div ng-if="item.contentType.settings.view" ng-include="item.contentType.settings.view"></div>
+                <div ng-if="item.contentType.settings.view" ng-include="item.contentType.config.view"></div>
                 <div class="skybrud-elements-preview" ng-if="!item.contentType.settings.view">
                     <div class="skybrud-elements-preview-content" ng-click="editItem(item)">
                         <i class="icon {{item.contentType.icon}}"></i>
