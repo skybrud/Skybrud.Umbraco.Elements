@@ -4,11 +4,55 @@
     }
 }
 
+
+.hejsan {
+
+    .image {
+        position: relative;
+        width: 250px;
+        height: 175px;
+        background: #F6F4F4;
+
+        .actions {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: row;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .action {
+            font-size: 16px;
+            background: #fff;
+            height: 25px;
+            width: 25px;
+            border-radius: 15px;
+            color: #1e1c1c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 5px;
+            text-decoration: none;
+            box-shadow: 0 1px 2px rgba(0,0,0,.25);
+
+            &.-red {
+                color: #d42054;
+            }
+        }
+
+        &:hover .actions {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
+
 .skybrud-elements-add {
-    
     display: flex;
     margin-top: 10px;
-
     margin: 10px -5px 0 -5px;
 
     a {
@@ -26,7 +70,6 @@
         flex: 1;
         margin: 0;
     }
-
     /*a:first-child:not(:last-child) {
         margin: 0 5px 0 0;
     }
@@ -98,6 +141,7 @@
 
 .umb-control.-active .skybrud-elements-element {
     padding: 10px;
+
     .--actions {
         display: block;
     }
@@ -118,6 +162,7 @@
             font-size: 14px;
             padding: 3px;
             text-decoration: none;
+
             i.icon {
                 color: #fff;
             }
@@ -129,5 +174,4 @@
             display: block;
         }
     }
-
 }
