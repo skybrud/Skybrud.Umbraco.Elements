@@ -12,7 +12,8 @@
 
         var lookup = {};
 
-        $scope.contentTypes = r;
+        // Limit the content types to only element types
+        $scope.contentTypes = _.filter(r, (x) => x.isElement);
 
         r.forEach(function (t) {
             lookup[t.key] = t;
