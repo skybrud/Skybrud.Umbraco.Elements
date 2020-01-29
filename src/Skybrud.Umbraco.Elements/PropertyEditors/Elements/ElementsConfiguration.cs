@@ -8,7 +8,7 @@ namespace Skybrud.Umbraco.Elements.PropertyEditors.Elements {
         public string View { get; set; }
 
         [ConfigurationField("allowedTypes", "Allowed element types", "/App_Plugins/Skybrud.Umbraco.Elements/Views/ContentTypes.html", Description = "Select the element types should be allowed.")]
-        public string[] AllowedTypes { get; set; }
+        public object AllowedTypes { get; set; }
 
         [ConfigurationField("singlePicker", "Pick a single item", "boolean")]
         public bool SinglePicker { get; set; }

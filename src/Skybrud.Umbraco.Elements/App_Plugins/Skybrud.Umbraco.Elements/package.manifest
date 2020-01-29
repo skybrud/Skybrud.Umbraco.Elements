@@ -1,9 +1,10 @@
 ﻿{
   "javascript": [
     "/App_Plugins/Skybrud.Umbraco.Elements/Scripts/Controllers/ContentTypes.js",
+    "/App_Plugins/Skybrud.Umbraco.Elements/Scripts/Controllers/Editor.js",
     "/App_Plugins/Skybrud.Umbraco.Elements/Scripts/Controllers/Properties.js",
     "/App_Plugins/Skybrud.Umbraco.Elements/Scripts/Directives/Elements.js",
-    "/App_Plugins/Skybrud.Umbraco.Elements/Scripts/Directives/ElementsElement.js"
+    "/App_Plugins/Skybrud.Umbraco.Elements/Scripts/Services/Elements.js"
   ],
   "css": [
     "/App_Plugins/Skybrud.Umbraco.Elements/Styles/Default.css"
