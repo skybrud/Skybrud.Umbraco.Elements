@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>1.0.0-alpha004</Version>
+    <Version>1.0.0-alpha005</Version>
     <Authors>Anders Bjerner</Authors>
-    <Copyright>Copyright © 2019</Copyright>
+    <Copyright>Copyright © 2020</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
