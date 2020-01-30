@@ -10,6 +10,16 @@
     <Copyright>Copyright © 2020</Copyright>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>Skybrud.Umbraco.Elements</PackageId>
+    <PackageTags>Umbraco, Content, Editor, Elements</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/skybrud/Skybrud.Umbraco.Elements</PackageProjectUrl>
+    <PackageIconUrl>http://www.skybrud.dk/img/5431sk/icon/favicon.ico</PackageIconUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/skybrud/Skybrud.Umbraco.Elements</RepositoryUrl>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Skybrud.Essentials" Version="1.1.17" />
     <PackageReference Include="Skybrud.Umbraco.GridData" Version="3.0.0-beta003" />
