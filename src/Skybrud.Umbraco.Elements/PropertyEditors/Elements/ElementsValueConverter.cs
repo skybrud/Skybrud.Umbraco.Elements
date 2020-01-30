@@ -14,7 +14,7 @@ namespace Skybrud.Umbraco.Elements.PropertyEditors.Elements {
         //}
 
         public override bool IsConverter(IPublishedPropertyType propertyType) {
-            return propertyType.EditorAlias == "Skybrud.Umbraco.Elements" || propertyType.EditorAlias == "Skybrud.Umbraco.Elements.List" || propertyType.EditorAlias == "Skybrud.Umbraco.Elements.Element" || propertyType.EditorAlias == "Skybrud.Umbraco.Elements.Multiple";
+            return propertyType.EditorAlias == "Skybrud.Umbraco.Elements";
         }
 
         public override object ConvertSourceToIntermediate(IPublishedElement owner, IPublishedPropertyType propertyType, object source, bool preview) {
@@ -26,20 +26,11 @@ namespace Skybrud.Umbraco.Elements.PropertyEditors.Elements {
             // TODO: Get helper instance via DI
             PublishedElementHelper helper = new PublishedElementHelper();
 
-            switch (propertyType.EditorAlias) {
+            var cfg = propertyType.DataType.ConfigurationAs<ElementsConfiguration>();
 
-                case "Skybrud.Umbraco.Elements":
-                case "Skybrud.Umbraco.Elements.List":
-                case "Skybrud.Umbraco.Elements.Multiple":
-                    return helper.Deserialize(strValue);
+            var value = helper.Deserialize(strValue);
 
-                case "Skybrud.Umbraco.Elements.Element":
-                    return helper.Deserialize(strValue)?.FirstOrDefault();
-
-                default:
-                    return typeof(object);
-
-            }
+            return cfg.SinglePicker ? value.FirstOrDefault() : (object) value;
 
         }
         
@@ -56,22 +47,8 @@ namespace Skybrud.Umbraco.Elements.PropertyEditors.Elements {
         }
 
         public override Type GetPropertyValueType(IPublishedPropertyType propertyType) {
-
-            switch (propertyType.EditorAlias) {
-
-                case "Skybrud.Umbraco.Elements":
-                case "Skybrud.Umbraco.Elements.List":
-                case "Skybrud.Umbraco.Elements.Multiple":
-                    return typeof(IPublishedElement[]);
-
-                case "Skybrud.Umbraco.Elements.Element":
-                    return typeof(IPublishedElement);
-
-                default:
-                    return typeof(object);
-
-            }
-
+            var cfg = propertyType.DataType.ConfigurationAs<ElementsConfiguration>();
+            return cfg.SinglePicker ? typeof(IPublishedElement) : typeof(IPublishedElement[]);
         }
 
     }
