@@ -38,26 +38,7 @@
   opacity: 1;
   visibility: visible;
 }
-/*
-
-                
-            
-            <div class="image" ng-if="images[item.key]">
-                <img ng-src="{{images[item.key].cropUrl}}" alt="" /><br />
-                <div class="actions">
-                    <a class="action" data-element="action-edit" href="/umbraco/#/media/media/edit/{{images[item.key].id}}">
-                        <i class="icon icon-edit"></i>
-                    </a>
-                    <a href="#" class="action -red" ng-click="removeImage(item)" prevent-default>
-                        <i class="icon icon-delete"></i>
-                    </a>
-                </div>
-            </div>
-
-            
-
-*/
-.skybrud-inner-content-add {
+.skybrud-elements-add {
   display: flex;
   margin-top: 10px;
   margin: 10px -5px 0 -5px;
@@ -69,7 +50,7 @@
         margin: 0 0 0 5px;
     }*/
 }
-.skybrud-inner-content-add a {
+.skybrud-elements-add a {
   display: -ms-flexbox;
   display: flex;
   padding: 5px 15px;
@@ -82,39 +63,74 @@
   -ms-flex-pack: center;
   justify-content: center;
   flex: 1;
-  margin: 0 5px;
+  margin: 0;
 }
-.skybrid-inner-content-element .--element {
+.skybrud-elements .skybrud-elements-item {
   position: relative;
 }
-.skybrid-inner-content-element .--preview {
-  cursor: pointer;
-  padding: 25px;
+.skybrud-elements .skybrud-elements-item + .skybrud-elements-item,
+.skybrud-elements .skybrud-elements-item + .skybrud-elements-add {
+  margin-top: 10px;
+}
+.skybrud-elements .skybrud-elements-preview {
   border: 1px dashed #bbbabf;
   background: #F8F8F8;
 }
-.skybrid-inner-content-element .--preview i.icon {
-  font-size: 46px;
-  margin-bottom: 15px;
-  display: block;
+.skybrud-elements .skybrud-elements-preview .skybrud-elements-preview-content {
+  text-align: center;
+  cursor: pointer;
+  padding: 10px;
+  overflow: hidden;
 }
-.skybrid-inner-content-element .--preview strong {
+.skybrud-elements .skybrud-elements-preview .skybrud-elements-preview-content i.icon {
+  font-size: 32px;
+  line-height: 32px;
+  margin-bottom: 5px;
+  display: block;
+  transition: transform linear 0.1s;
+}
+.skybrud-elements .skybrud-elements-preview .skybrud-elements-preview-content:hover i.icon {
+  transform: scale(1.2);
+}
+.skybrud-elements .skybrud-elements-preview strong {
   font-size: 12px;
 }
-.skybrid-inner-content-element .--actions {
-  display: none;
+.skybrud-elements .--actions {
   position: absolute;
   right: 5px;
   top: 5px;
   font-size: 12px;
   line-height: 12px;
+  font-weight: bold;
 }
-.skybrid-inner-content-element .skybrud-inner-content-add {
+.skybrud-elements .skybrud-elements-add {
   margin: 0;
 }
-.umb-control.-active .skybrid-inner-content-element {
+.skybrud-elements .-red {
+  color: #D42054;
+}
+.umb-control.-active .skybrud-elements-element {
   padding: 10px;
 }
-.umb-control.-active .skybrid-inner-content-element .--actions {
+.umb-control.-active .skybrud-elements-element .--actions {
+  display: block;
+}
+.skybrud-elements-item .--actions {
+  top: 0;
+  display: none;
+}
+.skybrud-elements-item .--actions a.-red {
+  background: #D42054;
+  color: white;
+  display: block;
+  border-radius: 0 0 5px 5px;
+  font-size: 14px;
+  padding: 3px;
+  text-decoration: none;
+}
+.skybrud-elements-item .--actions a.-red i.icon {
+  color: #fff;
+}
+.skybrud-elements-item:hover .--actions {
   display: block;
 }
