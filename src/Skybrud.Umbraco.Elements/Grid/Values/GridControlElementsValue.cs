@@ -8,7 +8,7 @@ using Umbraco.Core.Models.PublishedContent;
 namespace Skybrud.Umbraco.Elements.Grid.Values {
 
     [JsonConverter(typeof(PublishedElementJsonConverter))]
-    public class GridControlPublishedElementsValue : IGridControlValue {
+    public class GridControlElementsValue : IGridControlValue {
         
         #region Properties
 
@@ -22,7 +22,7 @@ namespace Skybrud.Umbraco.Elements.Grid.Values {
 
         #region Constructors
 
-        public GridControlPublishedElementsValue(GridControl control) {
+        public GridControlElementsValue(GridControl control) {
             Control = control;
             Elements = new PublishedElementHelper().ParseElements(control.JObject.GetArray("value"));
             IsValid = control.IsValid;

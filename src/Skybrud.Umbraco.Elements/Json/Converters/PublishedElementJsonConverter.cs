@@ -8,12 +8,12 @@ namespace Skybrud.Umbraco.Elements.Json.Converters {
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) {
 
-            if (value is GridControlPublishedElementValue element && element.Element != null) {
+            if (value is GridControlElementValue element && element.Element != null) {
                 serializer.Serialize(writer, element.Element);
                 return;
             }
 
-            if (value is GridControlPublishedElementsValue elements && elements.Elements != null && elements.Elements.Length > 0) {
+            if (value is GridControlElementsValue elements && elements.Elements != null && elements.Elements.Length > 0) {
                 serializer.Serialize(writer, elements.Elements);
                 return;
             }
