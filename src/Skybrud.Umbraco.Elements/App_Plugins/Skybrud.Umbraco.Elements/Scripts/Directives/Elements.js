@@ -191,7 +191,7 @@
                 editorService.open({
                     title: "Edit element",
                     view: "/App_Plugins/Skybrud.Umbraco.Elements/Views/Properties.html",
-                    //size: "small",
+                    size: "medium",
                     properties: properties,
                     submit: function (model) {
                         model.properties.forEach(function (p) {
