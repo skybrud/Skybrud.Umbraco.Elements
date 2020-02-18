@@ -174,28 +174,53 @@
             // Opens item editor in overlay
             scope.editItem = function (item, callback) {
 
+                var groups = [];
                 var properties = [];
 
-                item.contentType.propertyTypes.forEach(function (propertyType) {
-                    properties.push({
-                        alias: propertyType.alias,
-                        label: propertyType.name,
-                        description: propertyType.description,
-                        view: propertyType.dataType.view,
-                        value: item.value.properties[propertyType.alias] ? item.value.properties[propertyType.alias] : null,
-                        config: propertyType.dataType.config,
-                        validation: propertyType.validation
+                item.contentType.propertyGroups.forEach(function(pg) {
+
+                    var propertyGroup = {
+                        name: pg.name,
+                        properties: []
+                    };
+
+                    pg.propertyTypes.forEach(function (pt) {
+
+                        // Map the property
+                        var p = {
+                            alias: pt.alias,
+                            label: pt.name,
+                            description: pt.description,
+                            view: pt.dataType.view,
+                            value: item.value.properties[pt.alias] ? item.value.properties[pt.alias] : null,
+                            config: pt.dataType.config,
+                            validation: pt.validation
+                        };
+
+                        // Push the property to the properties collections
+                        properties.push(p);
+                        propertyGroup.properties.push(p);
+
                     });
+
+                    groups.push(propertyGroup);
+
                 });
 
                 editorService.open({
                     title: "Edit element",
                     view: "/App_Plugins/Skybrud.Umbraco.Elements/Views/Properties.html",
                     size: "medium",
+                    groups: groups,
                     properties: properties,
                     submit: function (model) {
-                        model.properties.forEach(function (p) {
-                            item.value.properties[p.alias] = p.value;
+                        //model.properties.forEach(function (p) {
+                        //    item.value.properties[p.alias] = p.value;
+                        //});
+                        model.groups.forEach(function (g) {
+                            g.properties.forEach(function (p) {
+                                item.value.properties[p.alias] = p.value;
+                            });
                         });
                         editorService.close();
                         if (callback) callback(item);

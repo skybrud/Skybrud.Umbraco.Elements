@@ -9,7 +9,15 @@
                 hide-description="true">
             </umb-editor-header>
             <umb-editor-container>
-                <umb-box>
+                <div ng-if="model.groups" class="umb-group-panel" ng-repeat="group in model.groups">
+                    <div class="umb-group-panel__header">{{group.name}}</div>
+                    <div class="umb-group-panel__content">
+                        <umb-property property="property" ng-repeat="property in group.properties">
+                            <umb-property-editor model="property"></umb-property-editor>
+                        </umb-property>
+                    </div>
+                </div>
+                <umb-box ng-if="model.properties && !model.groups">
                     <umb-box-content>
                         <umb-property property="property" ng-repeat="property in model.properties">
                             <umb-property-editor model="property"></umb-property-editor>

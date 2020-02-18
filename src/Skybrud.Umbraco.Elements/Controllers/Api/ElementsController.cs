@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Skybrud.Essentials.Strings;
 using Skybrud.Umbraco.Elements.Models;
+using Skybrud.Umbraco.Elements.Models.ContentTypes;
 using Skybrud.WebApi.Json;
 using Umbraco.Core;
 using Umbraco.Core.Models.PublishedContent;
@@ -27,7 +28,7 @@ namespace Skybrud.Umbraco.Elements.Controllers.Api {
 
                     if (ct == null) continue;
 
-                    temp.Add(new SkybrudElementType(ct, Services));
+                    temp.Add(new SkybrudElementsType(ct, Services));
 
                 } else if (int.TryParse(id, out int numeric)) {
 
@@ -35,7 +36,7 @@ namespace Skybrud.Umbraco.Elements.Controllers.Api {
 
                     if (ct == null) continue;
 
-                    temp.Add(new SkybrudElementType(ct, Services));
+                    temp.Add(new SkybrudElementsType(ct, Services));
 
                 }
 
