@@ -109,10 +109,10 @@
 .skybrud-elements .-red {
   color: #D42054;
 }
-.umb-control.-active .skybrud-elements-element {
+.umb-control.-active .skybrud-elements {
   padding: 10px;
 }
-.umb-control.-active .skybrud-elements-element .--actions {
+.umb-control.-active .skybrud-elements .--actions {
   display: block;
 }
 .skybrud-elements-item .--actions {

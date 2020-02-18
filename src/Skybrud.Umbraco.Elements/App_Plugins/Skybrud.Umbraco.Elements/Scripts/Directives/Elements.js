@@ -17,7 +17,7 @@
         transclude: true,
         restrict: "E",
         replace: true,
-        template: "<div><div ng-if=\"loaded\" ng-include=\"view\"></div></div>",
+        template: "<div class=\"skybrud-elements\"><div ng-if=\"loaded\" ng-include=\"view\"></div></div>",
         link: function (scope) {
 
             if (!scope.view) scope.view = "/App_Plugins/Skybrud.Umbraco.Elements/Views/Partials/Default.html";
