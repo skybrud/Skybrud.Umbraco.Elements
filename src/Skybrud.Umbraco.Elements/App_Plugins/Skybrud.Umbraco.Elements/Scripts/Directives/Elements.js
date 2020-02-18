@@ -28,8 +28,11 @@
 
             // Init config
             if (!scope.config) scope.config = {};
+            if (!scope.config.minItems) scope.config.minItems = 0;
             if (scope.config.maxItems === 0 || scope.config.maxItems === undefined) scope.config.maxItems = 999;
+            scope.config.singlePicker = scope.config.singlePicker === true;
             if (scope.config.singlePicker) scope.config.maxItems = 1;
+            scope.config.confirmDeletes = scope.config.confirmDeletes !== false;
 
             // Init scope variables
             scope.items = [];
