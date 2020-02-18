@@ -29,7 +29,7 @@
 
             // Append to selected items if found
             if (ct) {
-                ct.elementsSettings = item.config || item.settings || {};
+                ct.elementsSettings = item.config || {};
                 $scope.selected.push(ct);
             }
 

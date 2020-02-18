@@ -45,7 +45,7 @@
 
                 scope.contentTypes = r.data;
                 scope.contentTypes.forEach(function (ct) {
-                    ct.settings = {};
+                    ct.config = {};
                     scope.contentTypesLookup[ct.key] = ct;
                 });
 
@@ -61,7 +61,7 @@
                     if (typeof item === "string") return;
                     var ct = scope.contentTypesLookup[item.key];
                     if (ct) {
-                        ct.config = item.settings || {};
+                        ct.config = item.config || {};
                         if (ct.config.nameTemplate) ct.nameExp = $interpolate(ct.config.nameTemplate);
                     }
                 });
