@@ -27,8 +27,9 @@
             if (!Array.isArray(scope.value)) scope.value = [];
 
             // Init config
-            if (scope.config && scope.config.maxItems === 0) scope.config.maxItems = 999;
-            if (scope.config && scope.config.singlePicker) scope.config.maxItems = 1;
+            if (!scope.config) scope.config = {};
+            if (scope.config.maxItems === 0 || scope.config.maxItems === undefined) scope.config.maxItems = 999;
+            if (scope.config.singlePicker) scope.config.maxItems = 1;
 
             // Init scope variables
             scope.items = [];
