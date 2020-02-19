@@ -40,6 +40,7 @@ namespace Skybrud.Umbraco.Elements.Models.ContentTypes {
 
             PropertyGroups = ct
                 .CompositionPropertyGroups
+                .OrderBy(x => x.SortOrder)
                 .GroupBy(x => x.Name)
                 .Select(x => new SkybrudElementsPropertyGroup(x, services.DataTypeService));
 
