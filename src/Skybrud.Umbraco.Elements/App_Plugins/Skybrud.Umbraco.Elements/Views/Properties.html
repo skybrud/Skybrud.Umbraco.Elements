@@ -1,4 +1,4 @@
-﻿<div ng-controller="Skybrud.Umbraco.Elements.Properties.Controller">
+﻿<div class="skybrud-elements-properties" ng-controller="Skybrud.Umbraco.Elements.Properties.Controller">
     <form name="propertiesForm" ng-submit="save()" novalidate val-form-manager>
         <umb-editor-view>
             <umb-editor-header
@@ -9,13 +9,30 @@
                 hide-description="true">
             </umb-editor-header>
             <umb-editor-container>
-                <div ng-if="model.groups" class="umb-group-panel" ng-repeat="group in model.groups">
-                    <div class="umb-group-panel__header">{{group.name}}</div>
-                    <div class="umb-group-panel__content">
-                        <umb-property property="property" ng-repeat="property in group.properties">
-                            <umb-property-editor model="property"></umb-property-editor>
-                        </umb-property>
-                    </div>
+                <div ng-if="model.groups" ng-repeat="group in model.groups">
+                    <ng-form>
+                        <div class="umb-expansion-panel" ng-if="group.collapsible">
+                            <div class="umb-expansion-panel__header" ng-click="group.open = !group.open">
+                                <div>{{group.name}}</div>
+                                <ins class="umb-expansion-panel__expand" ng-class="{'icon-navigation-down': !group.open, 'icon-navigation-up': group.open}">&nbsp;</ins>
+                            </div>
+                            <div class="umb-expansion-panel__content" ng-show="group.open">
+                                <umb-property property="property" ng-repeat="property in group.properties">
+                                    <umb-property-editor model="property"></umb-property-editor>
+                                </umb-property>
+                            </div>
+                        </div>
+                        <div class="umb-group-panel" ng-if="!group.collapsible">
+                            <div class="umb-group-panel__header">
+                                <div>{{group.name}}</div>
+                            </div>
+                            <div class="umb-group-panel__content">
+                                <umb-property property="property" ng-repeat="property in group.properties">
+                                    <umb-property-editor model="property"></umb-property-editor>
+                                </umb-property>
+                            </div>
+                        </div>
+                    </ng-form>
                 </div>
                 <umb-box ng-if="model.properties && !model.groups">
                     <umb-box-content>
