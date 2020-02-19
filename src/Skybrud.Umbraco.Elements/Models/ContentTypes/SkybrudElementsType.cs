@@ -38,7 +38,10 @@ namespace Skybrud.Umbraco.Elements.Models.ContentTypes {
             Icon = ct.Icon;
             Alias = ct.Alias;
 
-            PropertyGroups = ct.PropertyGroups.Select(x => new SkybrudElementsPropertyGroup(x, services.DataTypeService));
+            PropertyGroups = ct
+                .CompositionPropertyGroups
+                .GroupBy(x => x.Name)
+                .Select(x => new SkybrudElementsPropertyGroup(x, services.DataTypeService));
 
             PropertyTypes = PropertyGroups.SelectMany(x => x.PropertyTypes);
 
