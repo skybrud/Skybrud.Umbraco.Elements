@@ -12,7 +12,8 @@
         scope: {
             value: "=",
             config: "=",
-            view: "="
+            view: "=",
+            control: "="
         },
         transclude: true,
         restrict: "E",
