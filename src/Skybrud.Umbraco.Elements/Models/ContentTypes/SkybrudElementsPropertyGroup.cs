@@ -25,7 +25,7 @@ namespace Skybrud.Umbraco.Elements.Models.ContentTypes {
         public SkybrudElementsPropertyGroup(IEnumerable<PropertyGroup> groups, IDataTypeService dataTypeService) {
             Id = groups.First().Id;
             Name = groups.First().Name;
-            PropertyTypes = groups.SelectMany(x => x.PropertyTypes.Select(y => new SkybrudElementsProperty(y, dataTypeService)));
+            PropertyTypes = groups.OrderBy(x => x.SortOrder).SelectMany(x => x.PropertyTypes.Select(y => new SkybrudElementsProperty(y, dataTypeService)));
         }
 
     }
