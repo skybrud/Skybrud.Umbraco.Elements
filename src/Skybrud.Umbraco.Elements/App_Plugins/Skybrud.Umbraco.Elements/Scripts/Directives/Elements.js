@@ -217,11 +217,7 @@
                     view: "/App_Plugins/Skybrud.Umbraco.Elements/Views/Properties.html",
                     size: "medium",
                     groups: groups,
-                    properties: properties,
                     submit: function (model) {
-                        //model.properties.forEach(function (p) {
-                        //    item.value.properties[p.alias] = p.value;
-                        //});
                         model.groups.forEach(function (g) {
                             g.properties.forEach(function (p) {
                                 item.value.properties[p.alias] = p.value;

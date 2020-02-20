@@ -24,9 +24,6 @@ namespace Skybrud.Umbraco.Elements.Models.ContentTypes {
         [JsonProperty("icon")]
         public string Icon { get; set; }
 
-        [JsonProperty("propertyTypes")]
-        public object PropertyTypes { get; set; }
-
         [JsonProperty("propertyGroups")]
         public IEnumerable<SkybrudElementsPropertyGroup> PropertyGroups { get; set; }
 
@@ -43,8 +40,6 @@ namespace Skybrud.Umbraco.Elements.Models.ContentTypes {
                 .OrderBy(x => x.SortOrder)
                 .GroupBy(x => x.Name)
                 .Select(x => new SkybrudElementsPropertyGroup(x, services.DataTypeService));
-
-            PropertyTypes = PropertyGroups.SelectMany(x => x.PropertyTypes);
 
         }
 
