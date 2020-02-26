@@ -56,7 +56,7 @@ namespace Skybrud.Umbraco.Elements {
 
             if (string.IsNullOrWhiteSpace(str)) return new IPublishedElement[0];
 
-            JToken token = JsonUtils.LoadJsonToken(str);
+            JToken token = JsonUtils.ParseJsonToken(str);
 
             switch (token) {
 
