@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Linq;
+using Newtonsoft.Json;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Umbraco.Elements.Json.Converters;
 using Skybrud.Umbraco.GridData;
@@ -24,7 +25,7 @@ namespace Skybrud.Umbraco.Elements.Grid.Values {
 
         public GridControlElementValue(GridControl control) {
             Control = control;
-            Element = new PublishedElementHelper().ParseElement(control.JObject.GetObject("value"));
+            Element = new PublishedElementHelper().ParseElements(control.JObject.GetArray("value")).FirstOrDefault();
             IsValid = Element != null;
         }
 
