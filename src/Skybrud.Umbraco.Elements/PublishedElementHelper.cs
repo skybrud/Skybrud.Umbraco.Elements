@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Skybrud.Essentials.Json;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Umbraco.Elements.Exceptions;
 using Skybrud.Umbraco.Elements.Models;
@@ -57,12 +56,7 @@ namespace Skybrud.Umbraco.Elements {
 
             if (string.IsNullOrWhiteSpace(str)) return new IPublishedElement[0];
 
-            // JSON.net is automatically parsing strings that look like dates into in actual dates so that we can't
-            // really read as strings without some localization going on. Since this is kinda annoying an we don't
-            // really need it, we can luckily disable it with the lines below
-            JToken token = JToken.Load(new JsonTextReader(new StringReader(str)) {
-                DateParseHandling = DateParseHandling.None
-            });
+            JToken token = JsonUtils.LoadJsonToken(str);
 
             switch (token) {
 
@@ -80,10 +74,13 @@ namespace Skybrud.Umbraco.Elements {
         }
 
         public virtual IPublishedElement ParseElement(JObject obj) {
+            if (obj == null) return null;
             return ParseElements(new JArray(obj))[0];
         }
 
         public virtual IPublishedElement[] ParseElements(JArray array) {
+
+            if (array == null) return new IPublishedElement[0];
 
             List<IPublishedElement> items = new List<IPublishedElement>();
 
