@@ -2,7 +2,7 @@
 
 namespace Skybrud.Umbraco.Elements.Composers {
 
-    public class ElementsContentComposer : IUserComposer {
+    public class ElementsComposer : IUserComposer {
 
         public void Compose(Composition composition) {
             //composition.Register<IPublishedElementHelper, PublishedElementHelper>();
