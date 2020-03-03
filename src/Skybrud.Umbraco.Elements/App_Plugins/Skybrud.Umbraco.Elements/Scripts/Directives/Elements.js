@@ -13,6 +13,7 @@
             value: "=",
             config: "=",
             view: "=",
+            row: "=",
             control: "="
         },
         transclude: true,
@@ -52,6 +53,17 @@
                 scope.contentTypes.forEach(function (ct) {
                     ct.config = {};
                     scope.contentTypesLookup[ct.key] = ct;
+
+                    // Gets whether a property type with "alias" exists on "ct"
+                    ct.hasPropertyType = function (alias) {
+                        for (var i = 0; i < ct.propertyGroups.length; i++) {
+                            for (var j = 0; j < ct.propertyGroups[i].propertyTypes.length; j++) {
+                                if (ct.propertyGroups[i].propertyTypes[j].alias === alias) return true;
+                            }
+                        }
+                        return false;
+                    };
+
                 });
 
                 scope.value.forEach(function (v) {
@@ -78,19 +90,23 @@
 
             // Ensures changes in "scope.items" are pushed back to "scope.value"
             scope.sync = function () {
-
                 var temp = [];
-
                 scope.items.forEach(function (item) {
                     temp.push(item.value);
                 });
-
                 scope.value = temp;
+            };
 
+            // Swaps the items as indexes "index1" and "index2"
+            scope.swap = function (index1, index2) {
+                var first = scope.items[index1];
+                scope.items[index1] = scope.items[index2];
+                scope.items[index2] = first;
+                scope.sync();
             };
 
             // Initializes the model for a new item
-            function initNewItem(contentType, properties) {
+            scope.initNewItem = function (contentType, properties) {
                 return {
                     contentType: contentType,
                     value: {
@@ -99,11 +115,11 @@
                         properties: properties || {}
                     }
                 };
-            }
+            };
 
             // Opens the editor for a new item, and adds the item when the user submits
             scope.addItemFromContentType = function (contentType, properties, callback) {
-                var item = initNewItem(contentType, properties);
+                var item = scope.initNewItem(contentType, properties);
                 scope.editItem(item, function () {
                     scope.items.push(item);
                     scope.sync();
@@ -182,7 +198,7 @@
                 var groups = [];
                 var properties = [];
 
-                item.contentType.propertyGroups.forEach(function(pg) {
+                item.contentType.propertyGroups.forEach(function (pg) {
 
                     var propertyGroup = {
                         name: pg.name,
@@ -246,8 +262,10 @@
                     if (newName && (newName = $.trim(newName))) {
                         name = newName;
                     }
+
                     // Delete the index property as we don't want to persist it
                     delete item.value.properties["$index"];
+
                 }
 
                 // if we still do not have a name and we have multiple content types to choose from, use the content type name (same as is shown in the content type picker)
