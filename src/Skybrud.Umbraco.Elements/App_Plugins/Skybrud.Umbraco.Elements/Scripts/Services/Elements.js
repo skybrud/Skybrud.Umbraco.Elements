@@ -17,9 +17,16 @@
 
         // Gets information about the image with "id"
         getImage: function (id, width, height) {
+
             if (!width) width = 250;
             if (!height) height = 175;
-            return $http.get("/umbraco/backoffice/Skybrud/Elements/GetImage?id=" + id + "&width=" + width + "&height=" + height);
+
+            return $http({
+                method: "GET",
+                url: "/umbraco/backoffice/Skybrud/Elements/GetImage?id=" + id + "&width=" + width + "&height=" + height,
+                umbIgnoreStatus: [404]
+            });
+
         },
 
         // Gets information about the image with "id"

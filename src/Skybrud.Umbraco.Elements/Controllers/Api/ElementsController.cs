@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using Skybrud.Essentials.Strings;
 using Skybrud.Umbraco.Elements.Models.ContentTypes;
@@ -52,7 +54,11 @@ namespace Skybrud.Umbraco.Elements.Controllers.Api {
 
         [HttpGet]
         public object GetImage(string id, int width = 350, int height = 250) {
-            return GetImageFromCache(id, width, height) ?? GetImageFromService(id, width, height);
+
+            ElementsImage image = GetImageFromCache(id, width, height) ?? GetImageFromService(id, width, height);
+
+            return Request.CreateResponse(image == null ? HttpStatusCode.NotFound : HttpStatusCode.OK, image);
+
         }
 
         [HttpGet]
