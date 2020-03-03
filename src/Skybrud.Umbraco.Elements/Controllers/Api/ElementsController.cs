@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web.Http;
 using Skybrud.Essentials.Strings;
-using Skybrud.Umbraco.Elements.Models;
 using Skybrud.Umbraco.Elements.Models.ContentTypes;
+using Skybrud.Umbraco.Elements.Models.Images;
 using Skybrud.WebApi.Json;
 using Umbraco.Core;
+using Umbraco.Core.Models;
 using Umbraco.Core.Models.PublishedContent;
-using Umbraco.Web;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.WebApi;
 
@@ -14,8 +15,11 @@ namespace Skybrud.Umbraco.Elements.Controllers.Api {
 
     [JsonOnlyConfiguration]
     [PluginController("Skybrud")]
-    public class ElementsController : UmbracoAuthorizedApiController {
+    public partial class ElementsController : UmbracoAuthorizedApiController {
 
+        #region Public API methods
+
+        [HttpGet]
         public object GetContentTypes(string ids) {
 
             List<object> temp = new List<object>();
@@ -46,7 +50,32 @@ namespace Skybrud.Umbraco.Elements.Controllers.Api {
 
         }
 
+        [HttpGet]
         public object GetImage(string id, int width = 350, int height = 250) {
+            return GetImageFromCache(id, width, height) ?? GetImageFromService(id, width, height);
+        }
+
+        [HttpGet]
+        public object GetImages(string ids, int width = 350, int height = 250) {
+
+            List<object> results = new List<object>();
+
+            foreach (string id in (ids ?? string.Empty).Split(',')) {
+
+                ElementsImage media = GetImageFromCache(id, width, height) ?? GetImageFromService(id, width, height);
+                if (media == null) return null;
+
+                results.Add(media);
+
+            }
+
+            return results;
+
+        }
+
+        #endregion
+
+        private ElementsImage GetImageFromCache(string id, int width, int height) {
 
             IPublishedContent media = null;
 
@@ -56,49 +85,21 @@ namespace Skybrud.Umbraco.Elements.Controllers.Api {
                 media = Umbraco.Media(numericId);
             }
 
-            if (media == null) return null;
-
-            string cropUrl = media.GetCropUrl(width, height, preferFocalPoint: true);
-
-            return new {
-                id = media.Id,
-                key = media.Key,
-                udi = Udi.Create("media", media.Key),
-                name = media.Name,
-                cropUrl
-            };
+            return media == null ? null : new ElementsImage(media, width, height);
 
         }
 
-        public object GetImages(string ids, int width = 350, int height = 250) {
+        private ElementsImage GetImageFromService(string id, int width, int height) {
 
-            List<object> results = new List<object>();
+            IMedia media = null;
 
-            foreach (string id in (ids ?? string.Empty).Split(',')) {
-
-                IPublishedContent media = null;
-
-                if (Udi.TryParse(id, out Udi udi)) {
-                    media = Umbraco.Media(udi);
-                } else if (int.TryParse(id, out int numericId)) {
-                    media = Umbraco.Media(numericId);
-                }
-
-                if (media == null) return null;
-
-                string cropUrl = media.GetCropUrl(width, height, preferFocalPoint: true);
-
-                results.Add(new {
-                    id = media.Id,
-                    key = media.Key,
-                    udi = Udi.Create("media", media.Key),
-                    name = media.Name,
-                    cropUrl
-                });
-
+            if (Udi.TryParse(id, out Udi udi) && udi is GuidUdi guidUdi) {
+                media = Services.MediaService.GetById(guidUdi.Guid);
+            } else if (int.TryParse(id, out int numericId)) {
+                media = Services.MediaService.GetById(numericId);
             }
 
-            return results;
+            return media == null ? null : new ElementsImage(media, width, height);
 
         }
 
