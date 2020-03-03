@@ -15,7 +15,7 @@ namespace Skybrud.Umbraco.Elements.Controllers.Api {
 
     [JsonOnlyConfiguration]
     [PluginController("Skybrud")]
-    public partial class ElementsController : UmbracoAuthorizedApiController {
+    public class ElementsController : UmbracoAuthorizedApiController {
 
         #region Public API methods
 
@@ -75,6 +75,8 @@ namespace Skybrud.Umbraco.Elements.Controllers.Api {
 
         #endregion
 
+        #region Private helper methods
+
         private ElementsImage GetImageFromCache(string id, int width, int height) {
 
             IPublishedContent media = null;
@@ -102,6 +104,8 @@ namespace Skybrud.Umbraco.Elements.Controllers.Api {
             return media == null ? null : new ElementsImage(media, width, height);
 
         }
+
+        #endregion
 
     }
 
