@@ -18,7 +18,7 @@ namespace Skybrud.Umbraco.Elements.Models.ContentTypes {
 
         public SkybrudElementsDataType(IDataType dataType) {
             Alias = dataType.Editor.Alias;
-            View = dataType.Editor.GetValueEditor().View;
+            View = dataType.Editor.GetValueEditor(dataType.Configuration).View;
             Config = dataType.Editor.GetConfigurationEditor().ToValueEditor(dataType.Configuration);
         }
 
