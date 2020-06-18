@@ -54,14 +54,23 @@
                     ct.config = {};
                     scope.contentTypesLookup[ct.key] = ct;
 
-                    // Gets whether a property type with "alias" exists on "ct"
-                    ct.hasPropertyType = function (alias) {
+                    // Gets the property type matching the specified "x"
+                    ct.getPropertyType = function (x) {
                         for (var i = 0; i < ct.propertyGroups.length; i++) {
                             for (var j = 0; j < ct.propertyGroups[i].propertyTypes.length; j++) {
-                                if (ct.propertyGroups[i].propertyTypes[j].alias === alias) return true;
+                                if (typeof x === "string") {
+                                    if (ct.propertyGroups[i].propertyTypes[j].alias === x) return ct.propertyGroups[i].propertyTypes[j];
+                                } else if (typeof x === "function") {
+                                    if (x(ct.propertyGroups[i].propertyTypes[j])) return ct.propertyGroups[i].propertyTypes[j];
+                                }
                             }
                         }
-                        return false;
+                        return null;
+                    };
+
+                    // Gets whether a property type with "alias" exists on "ct"
+                    ct.hasPropertyType = function (alias) {
+                        return ct.getPropertyType(alias) != null;
                     };
 
                 });
