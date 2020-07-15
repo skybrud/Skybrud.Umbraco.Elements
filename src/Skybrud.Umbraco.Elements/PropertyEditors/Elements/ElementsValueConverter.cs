@@ -18,10 +18,15 @@ namespace Skybrud.Umbraco.Elements.PropertyEditors.Elements {
         }
 
         public override object ConvertSourceToIntermediate(IPublishedElement owner, IPublishedPropertyType propertyType, object source, bool preview) {
+            return source;
 
-            if (!(source is string)) return null;
+        }
+        
+        public override object ConvertIntermediateToObject(IPublishedElement owner, IPublishedPropertyType propertyType, PropertyCacheLevel referenceCacheLevel, object inter, bool preview) {
 
-            string strValue = source.ToString();
+            if (!(inter is string)) return null;
+
+            string strValue = inter.ToString();
 
             // TODO: Get helper instance via DI
             PublishedElementHelper helper = new PublishedElementHelper();
@@ -30,12 +35,8 @@ namespace Skybrud.Umbraco.Elements.PropertyEditors.Elements {
 
             var value = helper.Deserialize(strValue);
 
-            return cfg.SinglePicker ? value.FirstOrDefault() : (object) value;
+            return cfg.SinglePicker ? value.FirstOrDefault() : (object)value;
 
-        }
-        
-        public override object ConvertIntermediateToObject(IPublishedElement owner, IPublishedPropertyType propertyType, PropertyCacheLevel referenceCacheLevel, object inter, bool preview) {
-            return inter;
         }
 
         public override object ConvertIntermediateToXPath(IPublishedElement owner, IPublishedPropertyType propertyType, PropertyCacheLevel referenceCacheLevel, object inter, bool preview) {
