@@ -251,24 +251,24 @@
                 });
 
                 localizationService.localize("elements_editElement").then(function (value) {
-                editorService.open({
+                    editorService.open({
                         title: value || "Edit element",
-                    view: "/App_Plugins/Skybrud.Umbraco.Elements/Views/Properties.html",
-                    size: "medium",
-                    groups: groups,
-                    submit: function (model) {
-                        model.groups.forEach(function (g) {
-                            g.properties.forEach(function (p) {
-                                item.value.properties[p.alias] = p.value;
+                        view: "/App_Plugins/Skybrud.Umbraco.Elements/Views/Properties.html",
+                        size: "medium",
+                        groups: groups,
+                        submit: function (model) {
+                            model.groups.forEach(function (g) {
+                                g.properties.forEach(function (p) {
+                                    item.value.properties[p.alias] = p.value;
+                                });
                             });
-                        });
-                        editorService.close();
-                        if (callback) callback(item);
-                    },
-                    close: function () {
-                        editorService.close();
-                    }
-                });
+                            editorService.close();
+                            if (callback) callback(item);
+                        },
+                        close: function () {
+                            editorService.close();
+                        }
+                    });
                 });
 
             };
@@ -303,6 +303,19 @@
 
                 return name;
 
+            };
+
+            scope.sortableOptions = {
+                distance: 10,
+                tolerance: "pointer",
+                scroll: true,
+                zIndex: 6000,
+                disabled: false,
+                containment: "parent",
+                placeholder: "elements-sortable-placeholder",
+                stop: function () {
+                    scope.sync();
+                }
             };
 
         }
