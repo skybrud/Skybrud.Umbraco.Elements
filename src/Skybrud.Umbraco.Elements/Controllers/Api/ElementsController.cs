@@ -10,6 +10,7 @@ using Skybrud.WebApi.Json;
 using Umbraco.Core;
 using Umbraco.Core.Models;
 using Umbraco.Core.Models.PublishedContent;
+using Umbraco.Web.Editors;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.WebApi;
 
@@ -24,7 +25,7 @@ namespace Skybrud.Umbraco.Elements.Controllers.Api {
         [HttpGet]
         public object GetContentTypes(string ids) {
 
-            List<object> temp = new List<object>();
+            List<ElementsType> temp = new List<ElementsType>();
 
             foreach (string id in StringUtils.ParseStringArray(ids)) {
 
@@ -34,7 +35,7 @@ namespace Skybrud.Umbraco.Elements.Controllers.Api {
 
                     if (ct == null) continue;
 
-                    temp.Add(new SkybrudElementsType(ct, Services));
+                    temp.Add(new ElementsType(ct, Services));
 
                 } else if (int.TryParse(id, out int numeric)) {
 
@@ -42,11 +43,13 @@ namespace Skybrud.Umbraco.Elements.Controllers.Api {
 
                     if (ct == null) continue;
 
-                    temp.Add(new SkybrudElementsType(ct, Services));
+                    temp.Add(new ElementsType(ct, Services));
 
                 }
 
             }
+
+            ElementsEventManager.Emit(ActionContext, new EditorModelEventArgs(temp, UmbracoContext));
 
             return temp;
 
