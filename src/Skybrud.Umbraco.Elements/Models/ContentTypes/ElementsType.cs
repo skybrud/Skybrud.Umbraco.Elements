@@ -7,7 +7,9 @@ using Umbraco.Core.Services;
 
 namespace Skybrud.Umbraco.Elements.Models.ContentTypes {
 
-    public class SkybrudElementsType {
+    public class ElementsType {
+
+        #region Properties
 
         [JsonProperty("id")]
         public int Id { get; set; }
@@ -25,9 +27,15 @@ namespace Skybrud.Umbraco.Elements.Models.ContentTypes {
         public string Icon { get; set; }
 
         [JsonProperty("propertyGroups")]
-        public IEnumerable<SkybrudElementsPropertyGroup> PropertyGroups { get; set; }
+        public IEnumerable<ElementsPropertyGroup> PropertyGroups { get; set; }
 
-        public SkybrudElementsType(IContentType ct, ServiceContext services) {
+        #endregion
+
+        #region Constructors
+        
+        public ElementsType() { }
+
+        public ElementsType(IContentType ct, ServiceContext services) {
 
             Id = ct.Id;
             Key = ct.Key;
@@ -39,9 +47,11 @@ namespace Skybrud.Umbraco.Elements.Models.ContentTypes {
                 .CompositionPropertyGroups
                 .OrderBy(x => x.SortOrder)
                 .GroupBy(x => x.Name)
-                .Select(x => new SkybrudElementsPropertyGroup(x, services.DataTypeService));
+                .Select(x => new ElementsPropertyGroup(x, services.DataTypeService));
 
         }
+
+        #endregion
 
     }
 

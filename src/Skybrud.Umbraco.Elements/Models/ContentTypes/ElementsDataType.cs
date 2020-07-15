@@ -3,7 +3,7 @@ using Umbraco.Core.Models;
 
 namespace Skybrud.Umbraco.Elements.Models.ContentTypes {
 
-    public class SkybrudElementsDataType {
+    public class ElementsDataType {
 
         [JsonProperty("alias")]
         public string Alias { get; set; }
@@ -14,9 +14,9 @@ namespace Skybrud.Umbraco.Elements.Models.ContentTypes {
         [JsonProperty("config")]
         public object Config { get; set; }
 
-        public SkybrudElementsDataType() { }
+        public ElementsDataType() { }
 
-        public SkybrudElementsDataType(IDataType dataType) {
+        public ElementsDataType(IDataType dataType) {
             Alias = dataType.Editor.Alias;
             View = dataType.Editor.GetValueEditor(dataType.Configuration).View;
             Config = dataType.Editor.GetConfigurationEditor().ToValueEditor(dataType.Configuration);

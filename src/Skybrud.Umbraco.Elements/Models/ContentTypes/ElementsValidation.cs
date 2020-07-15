@@ -3,12 +3,14 @@ using Umbraco.Core.Models;
 
 namespace Skybrud.Umbraco.Elements.Models.ContentTypes {
 
-    public class SkybrudElementsValidation {
+    public class ElementsValidation {
 
         [JsonProperty("mandatory")]
         public bool IsMandatory { get; set; }
 
-        public SkybrudElementsValidation(PropertyType propertyType) {
+        public ElementsValidation() { }
+
+        public ElementsValidation(PropertyType propertyType) {
             IsMandatory = propertyType.Mandatory;
         }
 

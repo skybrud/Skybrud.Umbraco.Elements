@@ -219,12 +219,16 @@
                         // Map the property
                         var p = {
                             alias: pt.alias,
-                            label: pt.name,
+                            label: pt.label,
                             description: pt.description,
-                            view: pt.dataType.view,
+                            view: pt.view,
                             value: item.value.properties[pt.alias] ? item.value.properties[pt.alias] : null,
-                            config: pt.dataType.config,
-                            validation: pt.validation
+                            config: pt.config,
+                            hideLabel: pt.hideLabel,
+                            validation: pt.validation,
+                            readonly: pt.readonly,
+                            dataTypeKey: pt.dataTypeKey,
+                            editor: pt.editor
                         };
 
                         // Push the property to the properties collections
