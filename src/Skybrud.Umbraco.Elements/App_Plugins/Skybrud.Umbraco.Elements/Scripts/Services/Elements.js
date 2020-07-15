@@ -1,4 +1,4 @@
-﻿angular.module("umbraco").factory("skyElements", function ($http) {
+﻿angular.module("umbraco").factory("skyElements", function ($http, skyElements) {
 
     return {
 
@@ -13,6 +13,11 @@
 
             return $http.get("/umbraco/backoffice/Skybrud/Elements/GetContentTypes?ids=" + array.join(","));
 
+        },
+
+        // Returns a list of converters
+        getConverters: function () {
+            return $http.get("/umbraco/backoffice/Skybrud/Elements/GetConverters");
         },
 
         // Gets information about the image with "id"

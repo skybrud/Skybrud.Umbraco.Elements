@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Skybrud.Essentials.Strings;
+using Skybrud.Umbraco.Elements.Converters;
 using Skybrud.Umbraco.Elements.Models.ContentTypes;
 using Skybrud.Umbraco.Elements.Models.Images;
 using Skybrud.WebApi.Json;
@@ -19,6 +21,16 @@ namespace Skybrud.Umbraco.Elements.Controllers.Api {
     [JsonOnlyConfiguration]
     [PluginController("Skybrud")]
     public class ElementsController : UmbracoAuthorizedApiController {
+
+        private readonly ElementsConverterCollection _converters;
+
+        #region Constructors
+
+        public ElementsController(ElementsConverterCollection converters) {
+            _converters = converters;
+        }
+
+        #endregion
 
         #region Public API methods
 
@@ -52,6 +64,18 @@ namespace Skybrud.Umbraco.Elements.Controllers.Api {
             ElementsEventManager.Emit(ActionContext, new EditorModelEventArgs(temp, UmbracoContext));
 
             return temp;
+
+        }
+
+
+        [HttpGet]
+        public object GetConverters() {
+
+            return _converters.ToArray().Select(x => new {
+                assembly = x.GetType().Assembly.FullName,
+                key = x.GetType().AssemblyQualifiedName,
+                name = x.Name
+            });
 
         }
 

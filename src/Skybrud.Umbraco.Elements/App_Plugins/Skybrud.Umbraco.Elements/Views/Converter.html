@@ -1,0 +1,4 @@
+﻿<div ng-controller="Skybrud.Umbraco.Elements.Converter.Controller" class="umb-contentpicker">
+    <div ng-if="error" ng-bind-html="error" class="alert alert-danger">{{error}}</div>
+    <select ng-options="type as type.name for type in types track by type.key" ng-model="selected" ng-change="updated()" class="umb-property-editor"></select>
+</div>

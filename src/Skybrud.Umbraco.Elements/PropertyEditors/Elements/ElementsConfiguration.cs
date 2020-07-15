@@ -1,4 +1,5 @@
-﻿using Umbraco.Core.PropertyEditors;
+﻿using Newtonsoft.Json.Linq;
+using Umbraco.Core.PropertyEditors;
 
 namespace Skybrud.Umbraco.Elements.PropertyEditors.Elements {
 
@@ -24,6 +25,9 @@ namespace Skybrud.Umbraco.Elements.PropertyEditors.Elements {
 
         [ConfigurationField("hideLabel", "Hide Label", "boolean", Description = "Hide the property label and let the item list span the full width of the editor window.")]
         public bool HideLabel { get; set; }
+
+        [ConfigurationField("Converter", "Converter", "/App_Plugins/Skybrud.Umbraco.Elements/Views/Converter.html", Description = "Select an elements converter.")]
+        public JObject Converter { get; set; }
 
     }
 
