@@ -22,6 +22,10 @@
         template: "<div class=\"skybrud-elements\"><div ng-if=\"loaded\" ng-include=\"view\"></div></div>",
         link: function (scope) {
 
+            var labels = {
+                itemNo: "Item %0%"
+            };
+
             if (!scope.view) scope.view = "/App_Plugins/Skybrud.Umbraco.Elements/Views/Partials/Default.html";
 
             // Init value
@@ -42,6 +46,11 @@
             scope.contentTypesLookup = {};
 
             scope.loading = true;
+
+            // Get the label now as we can't use async inside the "getName" function
+            localizationService.localize("elements_itemNo").then(function(value) {
+                labels.itemNo = value;
+            });
 
             // Stop further execution if there are no selected content type
             if (scope.config.allowedTypes.length === 0) return;
@@ -241,8 +250,9 @@
 
                 });
 
+                localizationService.localize("elements_editElement").then(function (value) {
                 editorService.open({
-                    title: "Edit element",
+                        title: value || "Edit element",
                     view: "/App_Plugins/Skybrud.Umbraco.Elements/Views/Properties.html",
                     size: "medium",
                     groups: groups,
@@ -258,6 +268,7 @@
                     close: function () {
                         editorService.close();
                     }
+                });
                 });
 
             };
@@ -287,7 +298,7 @@
                 }
 
                 if (!name) {
-                    name = "Item " + (index + 1);
+                    name = localizationService.tokenReplace(labels.itemNo, [index + 1]);
                 }
 
                 return name;

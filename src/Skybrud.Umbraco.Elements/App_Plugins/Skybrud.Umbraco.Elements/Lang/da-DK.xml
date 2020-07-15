@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+
+<language alias="da" intName="Danish" localName="dansk" lcid="6" culture="da-DK">
+  <area alias="elements">
+    <key alias="editElement">Rediger element</key>
+    <key alias="itemNo">Element %0%</key>
+  </area>
+</language>
