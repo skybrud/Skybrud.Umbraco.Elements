@@ -1,4 +1,4 @@
-﻿angular.module("umbraco").factory("skyElements", function ($http, skyElements) {
+﻿angular.module("umbraco").factory("skyElements", function ($http) {
 
     return {
 
