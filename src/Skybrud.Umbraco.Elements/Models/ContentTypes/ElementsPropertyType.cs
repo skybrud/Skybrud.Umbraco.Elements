@@ -55,18 +55,18 @@ namespace Skybrud.Umbraco.Elements.Models.ContentTypes {
 
             IDataValueEditor valueEditor = dataType.Editor.GetValueEditor(dataType.Configuration);
 
+            DataType = new ElementsDataType(dataType);
+
             Alias = propertyType.Alias;
             Label = propertyType.Name;
             Description = propertyType.Description;
             View = valueEditor.View;
-            Config = dataType.Configuration;
+            Config = DataType.Config;
             HideLabel = valueEditor.HideLabel;
             Validation = new ElementsValidation(propertyType);
             IsReadOnly = valueEditor.IsReadOnly;
             DataTypeKey = propertyType.DataTypeKey;
             Editor = dataType.EditorAlias;
-
-            DataType = new ElementsDataType(dataType);
 
         }
 
