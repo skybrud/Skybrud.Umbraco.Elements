@@ -33,6 +33,7 @@
     <Content Include="App_Plugins\Skybrud.Umbraco.Elements\**\*.js" />
     <Content Include="App_Plugins\Skybrud.Umbraco.Elements\**\*.css" />
     <Content Include="App_Plugins\Skybrud.Umbraco.Elements\**\*.html" />
+    <Content Include="App_Plugins\Skybrud.Umbraco.Elements\**\*.xml" />
     <Content Include="App_Plugins\Skybrud.Umbraco.Elements\package.manifest" />
     <Content Include="App_Plugins\Skybrud.Umbraco.Elements\Styles\Default.less" />
   </ItemGroup>
