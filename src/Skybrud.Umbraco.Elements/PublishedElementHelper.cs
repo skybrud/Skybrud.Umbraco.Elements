@@ -108,7 +108,7 @@ namespace Skybrud.Umbraco.Elements {
                     // Get a reference to the property type
                     IPublishedPropertyType type = pct.GetPropertyType(prop.Name);
                     if (type == null) {
-                        _logger.Error<PublishedElementHelper>("Property type for property with alias {Alias} not found.", prop.Name);
+                        //_logger.Error<PublishedElementHelper>("Property type for property with alias {Alias} not found.", prop.Name);
                         continue;
                     }
 
