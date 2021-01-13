@@ -4,5 +4,6 @@
   <area alias="linkpicker">
     <key alias="editElement">Edit element</key>
     <key alias="itemNo">Item %0%</key>
+    <key alias="selectType">Select type</key>
   </area>
 </language>

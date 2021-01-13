@@ -23,7 +23,9 @@
         link: function (scope) {
 
             var labels = {
-                itemNo: "Item %0%"
+                itemNo: "Item %0%",
+                selectType: "Select type",
+                editElement: "Edit element"
             };
 
             if (!scope.view) scope.view = "/App_Plugins/Skybrud.Umbraco.Elements/Views/Partials/Default.html";
@@ -50,6 +52,14 @@
             // Get the label now as we can't use async inside the "getName" function
             localizationService.localize("elements_itemNo").then(function(value) {
                 labels.itemNo = value;
+            });
+
+            localizationService.localize("elements_selectType").then(function (value) {
+                labels.selectType = value;
+            });
+
+            localizationService.localize("elements_editElement").then(function (value) {
+                labels.editElement = value;
             });
 
             // Stop further execution if there are no selected content type
@@ -155,7 +165,7 @@
                 }
 
                 editorService.itemPicker({
-                    title: "Select type",
+                    title: labels.selectType,
                     filter: scope.contentTypes.length > 12,
                     availableItems: scope.contentTypes,
                     size: scope.contentTypes.length > 6 ? "medium" : "small",
@@ -252,7 +262,7 @@
 
                 localizationService.localize("elements_editElement").then(function (value) {
                     editorService.open({
-                        title: value || "Edit element",
+                        title: value || labels.editElement,
                         view: "/App_Plugins/Skybrud.Umbraco.Elements/Views/Properties.html",
                         size: "medium",
                         groups: groups,

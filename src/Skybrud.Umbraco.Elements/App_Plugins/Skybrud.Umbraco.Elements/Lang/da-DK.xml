@@ -4,5 +4,6 @@
   <area alias="elements">
     <key alias="editElement">Rediger element</key>
     <key alias="itemNo">Element %0%</key>
+    <key alias="selectType">Vælg type</key>
   </area>
 </language>
