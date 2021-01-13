@@ -101,7 +101,11 @@ namespace Skybrud.Umbraco.Elements {
                 // Convert the content type to it's published counterpart
                 IPublishedContentType pct = _publishedContentTypeFactory.CreateContentType(contentType);
 
+                // Initialize a new collection of properties
                 List<IPublishedProperty> properties = new List<IPublishedProperty>();
+
+                // Create the model based on our implementation of IPublishedElement
+                IPublishedElement element = new SkybrudPublishedElement(key, name, pct, properties);
 
                 foreach (JProperty prop in item.GetObject("properties").Properties()) {
 
@@ -118,7 +122,6 @@ namespace Skybrud.Umbraco.Elements {
                         continue;
                     }
 
-                   
                     #region Borrowed from Doc Type Grid Editor
 
                     ContentPropertyData contentPropData = new ContentPropertyData(prop.Value, type.DataType.Configuration);
@@ -131,7 +134,6 @@ namespace Skybrud.Umbraco.Elements {
                     } catch (Exception ex) {
                         throw new ElementsException($"Unable to find property editor with alias: {type.DataType.EditorAlias} (" + type.DataType.Id + ")", ex);
                     }
-
 
                     Property prop2 = null;
                     try {
@@ -149,20 +151,17 @@ namespace Skybrud.Umbraco.Elements {
 
                     if (prop2 != null) {
                         string newValue2 = propEditor.GetValueEditor().ConvertDbToString(propType2, newValue, _dataTypeService);
-                        properties.Add(new SkybrudPublishedProperty(type, prop.Name, newValue2));
+                        properties.Add(new SkybrudPublishedProperty(element, type, prop.Name, newValue2));
                     }
 
                     #endregion
 
                 }
 
-                // Create the model based on our implementation of IPublishedElement
-                IPublishedElement content = new SkybrudPublishedElement(key, name, pct, properties.ToArray());
-
                 // Let the current model factory create a typed model to wrap our model
-                if (_publishedModelFactory != null) content = _publishedModelFactory.CreateModel(content);
+                if (_publishedModelFactory != null) element = _publishedModelFactory.CreateModel(element);
 
-                items.Add(content);
+                items.Add(element);
 
             }
 

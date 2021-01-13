@@ -24,13 +24,13 @@ namespace Skybrud.Umbraco.Elements.Models {
 
         public object XPathValue => _xpathValue.Value;
 
-        public SkybrudPublishedProperty(IPublishedPropertyType propertyType, string alias, object value) {
+        public SkybrudPublishedProperty(IPublishedElement owner, IPublishedPropertyType propertyType, string alias, object value) {
             PropertyType = propertyType;
             Alias = alias;
             DataValue = value;
-            _sourceValue = new Lazy<object>(() => PropertyType.ConvertSourceToInter(null, DataValue, false));
-            _objectValue = new Lazy<object>(() => PropertyType.ConvertInterToObject(null, PropertyCacheLevel.None, _sourceValue.Value, false));
-            _xpathValue = new Lazy<object>(() => PropertyType.ConvertInterToXPath(null, PropertyCacheLevel.None, _sourceValue.Value, false));
+            _sourceValue = new Lazy<object>(() => PropertyType.ConvertSourceToInter(owner, DataValue, false));
+            _objectValue = new Lazy<object>(() => PropertyType.ConvertInterToObject(owner, PropertyCacheLevel.None, _sourceValue.Value, false));
+            _xpathValue = new Lazy<object>(() => PropertyType.ConvertInterToXPath(owner, PropertyCacheLevel.None, _sourceValue.Value, false));
         }
 
         bool IPublishedProperty.HasValue(string culture, string segment) {
