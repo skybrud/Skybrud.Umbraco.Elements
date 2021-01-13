@@ -46,7 +46,7 @@ namespace Skybrud.Umbraco.Elements.PropertyEditors.Elements {
                 PublishedElementHelper helper = new PublishedElementHelper();
 
                 // Deserialize the JSON into instances of IPublishedElement
-                value = helper.Deserialize(inter.ToString());
+                value = helper.Deserialize(owner, inter.ToString());
 
             } else {
 

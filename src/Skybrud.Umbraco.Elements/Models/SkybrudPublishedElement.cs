@@ -8,6 +8,8 @@ namespace Skybrud.Umbraco.Elements.Models {
 
     public class SkybrudPublishedElement : IPublishedElement {
 
+        public IPublishedElement Parent { get; }
+
         public IPublishedContentType ContentType { get; }
 
         public Guid Key { get; }
@@ -16,7 +18,8 @@ namespace Skybrud.Umbraco.Elements.Models {
 
         public IEnumerable<IPublishedProperty> Properties { get; }
 
-        public SkybrudPublishedElement(Guid key, string name, IPublishedContentType contentType, IEnumerable<IPublishedProperty> properties) {
+        public SkybrudPublishedElement(IPublishedElement parent, Guid key, string name, IPublishedContentType contentType, IEnumerable<IPublishedProperty> properties) {
+            Parent = parent;
             Key = key;
             Name = name;
             ContentType = contentType;

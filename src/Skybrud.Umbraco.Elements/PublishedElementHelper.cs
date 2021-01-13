@@ -51,8 +51,12 @@ namespace Skybrud.Umbraco.Elements {
         //    _propertyEditors = propertyEditors;
 
         //}
-
+        
         public virtual IPublishedElement[] Deserialize(string str) {
+            return Deserialize(null, str);
+        }
+        
+        public virtual IPublishedElement[] Deserialize(IPublishedElement parent, string str) {
 
             if (string.IsNullOrWhiteSpace(str)) return new IPublishedElement[0];
 
@@ -61,10 +65,10 @@ namespace Skybrud.Umbraco.Elements {
             switch (token) {
 
                 case JArray array:
-                    return ParseElements(array);
+                    return ParseElements(parent, array);
 
                 case JObject obj:
-                    return ParseElements(new JArray(obj));
+                    return ParseElements(parent, new JArray(obj));
 
                 default:
                     throw new ElementsException("Unsupported token type: " + token.Type);
@@ -74,11 +78,18 @@ namespace Skybrud.Umbraco.Elements {
         }
 
         public virtual IPublishedElement ParseElement(JObject obj) {
-            if (obj == null) return null;
-            return ParseElements(new JArray(obj))[0];
+            return ParseElement(null, obj);
+        }
+
+        public virtual IPublishedElement ParseElement(IPublishedElement parent, JObject obj) {
+            return obj == null ? null : ParseElements(parent, new JArray(obj))[0];
         }
 
         public virtual IPublishedElement[] ParseElements(JArray array) {
+            return ParseElements(null, array);
+        }
+
+        public virtual IPublishedElement[] ParseElements(IPublishedElement parent, JArray array) {
 
             if (array == null) return new IPublishedElement[0];
 
@@ -105,7 +116,7 @@ namespace Skybrud.Umbraco.Elements {
                 List<IPublishedProperty> properties = new List<IPublishedProperty>();
 
                 // Create the model based on our implementation of IPublishedElement
-                IPublishedElement element = new SkybrudPublishedElement(key, name, pct, properties);
+                IPublishedElement element = new SkybrudPublishedElement(parent, key, name, pct, properties);
 
                 foreach (JProperty prop in item.GetObject("properties").Properties()) {
 

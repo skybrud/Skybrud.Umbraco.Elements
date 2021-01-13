@@ -7,9 +7,15 @@ namespace Skybrud.Umbraco.Elements {
 
         IPublishedElement[] Deserialize(string str);
 
+        IPublishedElement[] Deserialize(IPublishedElement parent, string str);
+
         IPublishedElement ParseElement(JObject obj);
 
+        IPublishedElement ParseElement(IPublishedElement parent, JObject obj);
+
         IPublishedElement[] ParseElements(JArray array);
+
+        IPublishedElement[] ParseElements(IPublishedElement parent, JArray array);
 
     }
 
