@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 
 <language alias="en_us" intName="English (US)" localName="English (US)" lcid="" culture="en-US">
-  <area alias="linkpicker">
+  <area alias="elements">
     <key alias="editElement">Edit element</key>
     <key alias="itemNo">Item %0%</key>
     <key alias="selectType">Select type</key>
