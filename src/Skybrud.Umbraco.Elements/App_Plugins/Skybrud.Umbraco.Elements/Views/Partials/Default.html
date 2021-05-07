@@ -3,10 +3,12 @@
         <div ng-if="item.contentType.config.view" ng-include="item.contentType.config.view"></div>
         <div class="skybrud-elements-preview" ng-if="!item.contentType.config.view">
             <div class="skybrud-elements-preview-content" ng-click="editItem(item)">
-                <i class="icon {{item.contentType.icon}}"></i>
-                <strong>
-                    {{getName(item, $index)}}
-                </strong>
+                <div class="skybrud-elements-preview-content-type">
+                    <i class="icon {{item.contentType.icon}}"></i>
+                    <strong>
+                        {{getName(item, $index)}}
+                    </strong>
+                </div>
             </div>
             <div class="--actions">
                 <button type="button" class="-red" ng-click="requestDeleteItem($index)" localize="title" title="general_delete"><i class="icon icon-delete"></i></button>

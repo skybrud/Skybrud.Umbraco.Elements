@@ -82,14 +82,14 @@
   padding: 10px;
   overflow: hidden;
 }
-.skybrud-elements .skybrud-elements-preview .skybrud-elements-preview-content i.icon {
+.skybrud-elements .skybrud-elements-preview .skybrud-elements-preview-content-type i.icon {
   font-size: 32px;
   line-height: 32px;
   margin-bottom: 5px;
   display: block;
   transition: transform linear 0.1s;
 }
-.skybrud-elements .skybrud-elements-preview .skybrud-elements-preview-content:hover i.icon {
+.skybrud-elements .skybrud-elements-preview .skybrud-elements-preview-content-type:hover i.icon {
   transform: scale(1.2);
 }
 .skybrud-elements .skybrud-elements-preview strong {
