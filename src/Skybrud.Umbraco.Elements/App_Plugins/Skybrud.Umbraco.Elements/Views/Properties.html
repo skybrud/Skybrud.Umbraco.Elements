@@ -11,25 +11,27 @@
             <umb-editor-container>
                 <div ng-if="model.groups" ng-repeat="group in model.groups">
                     <ng-form>
-                        <div class="umb-expansion-panel" ng-if="group.collapsible">
-                            <div class="umb-expansion-panel__header" ng-click="group.open = !group.open">
-                                <div>{{group.name}}</div>
-                                <ins class="umb-expansion-panel__expand" ng-class="{'icon-navigation-down': !group.open, 'icon-navigation-up': group.open}">&nbsp;</ins>
+                        <div>
+                            <div class="umb-expansion-panel" ng-if="group.collapsible">
+                                <button type="button" class="btn-reset umb-expansion-panel__header" ng-click="group.open = !group.open">
+                                    <span>{{group.name}}</span>
+                                    <i class="umb-expansion-panel__expand" ng-class="{'icon-navigation-down': !group.open, 'icon-navigation-up': group.open}">&nbsp;</i>
+                                </button>
+                                <div class="umb-expansion-panel__content" ng-show="group.open">
+                                    <umb-property property="property" ng-repeat="property in group.properties">
+                                        <umb-property-editor model="property"></umb-property-editor>
+                                    </umb-property>
+                                </div>
                             </div>
-                            <div class="umb-expansion-panel__content" ng-show="group.open">
-                                <umb-property property="property" ng-repeat="property in group.properties">
-                                    <umb-property-editor model="property"></umb-property-editor>
-                                </umb-property>
-                            </div>
-                        </div>
-                        <div class="umb-group-panel" ng-if="!group.collapsible">
-                            <div class="umb-group-panel__header">
-                                <div>{{group.name}}</div>
-                            </div>
-                            <div class="umb-group-panel__content">
-                                <umb-property property="property" ng-repeat="property in group.properties">
-                                    <umb-property-editor model="property"></umb-property-editor>
-                                </umb-property>
+                            <div class="umb-group-panel" ng-if="!group.collapsible">
+                                <div class="umb-group-panel__header">
+                                    <div>{{group.name}}</div>
+                                </div>
+                                <div class="umb-group-panel__content">
+                                    <umb-property property="property" ng-repeat="property in group.properties">
+                                        <umb-property-editor model="property"></umb-property-editor>
+                                    </umb-property>
+                                </div>
                             </div>
                         </div>
                     </ng-form>
