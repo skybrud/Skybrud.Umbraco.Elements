@@ -150,30 +150,40 @@
 
 .skybrud-elements-item {
 
+    @defaultButtonBackground: #1b264f;
+    @dangerButtonBackground: #D42054;
+
     .--actions {
         top: 0;
         display: none;
 
-        a.-red {
-            background: #D42054;
+        button {
+            background: @defaultButtonBackground;
             color: white;
             display: block;
             border-radius: 0 0 5px 5px;
             font-size: 14px;
             padding: 3px;
             text-decoration: none;
-
+            border: 0;
+            line-height: 12px;
             i.icon {
                 color: #fff;
             }
         }
+
+        button.-red {
+            background: @dangerButtonBackground;
+        }
+
     }
 
     &:hover {
         .--actions {
-            display: block;
+            display: flex;
         }
     }
+
 }
 
 .skybrud-elements-properties {

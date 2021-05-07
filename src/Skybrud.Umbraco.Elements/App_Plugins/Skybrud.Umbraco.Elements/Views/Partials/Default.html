@@ -9,11 +9,11 @@
                 </strong>
             </div>
             <div class="--actions">
-                <a href="#" class="-red" prevent-default ng-click="requestDeleteItem($index)" localize="title" title="general_delete"><i class="icon icon-delete"></i></a>
+                <button type="button" class="-red" ng-click="requestDeleteItem($index)" localize="title" title="general_delete"><i class="icon icon-delete"></i></button>
             </div>
         </div>
     </div>
-    <a class="skybrud-elements-add umb-child-selector__child -placeholder" ng-show="items.length < config.maxItems" ng-click="addItem()">
+    <button type="button" class="skybrud-elements-add umb-child-selector__child -placeholder" ng-show="items.length < config.maxItems" ng-click="addItem()">
         <div class="umb-child-selector__child-name -blue"><strong><localize key="general_add">Add</localize></strong></div>
-    </a>
+    </button>
 </div>

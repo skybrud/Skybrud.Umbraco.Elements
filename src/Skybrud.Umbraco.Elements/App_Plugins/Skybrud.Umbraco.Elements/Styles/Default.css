@@ -119,20 +119,25 @@
   top: 0;
   display: none;
 }
-.skybrud-elements-item .--actions a.-red {
-  background: #D42054;
+.skybrud-elements-item .--actions button {
+  background: #1b264f;
   color: white;
   display: block;
   border-radius: 0 0 5px 5px;
   font-size: 14px;
   padding: 3px;
   text-decoration: none;
+  border: 0;
+  line-height: 12px;
 }
-.skybrud-elements-item .--actions a.-red i.icon {
+.skybrud-elements-item .--actions button i.icon {
   color: #fff;
 }
+.skybrud-elements-item .--actions button.-red {
+  background: #D42054;
+}
 .skybrud-elements-item:hover .--actions {
-  display: block;
+  display: flex;
 }
 .skybrud-elements-properties ng-form.ng-submitted.ng-invalid-required .umb-expansion-panel .umb-expansion-panel__header,
 .skybrud-elements-properties ng-form.ng-submitted.ng-invalid-required .umb-group-panel .umb-group-panel__header {
