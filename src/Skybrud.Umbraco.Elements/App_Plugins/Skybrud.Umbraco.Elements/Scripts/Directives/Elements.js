@@ -28,7 +28,11 @@
                 editElement: "Edit element"
             };
 
+            // Set the default view if nothing is specified in the prevalues
             if (!scope.view) scope.view = "/App_Plugins/Skybrud.Umbraco.Elements/Views/Partials/Default.html";
+
+            // Append cache buster value to the view
+            if (scope.view.indexOf("?") === -1) scope.view += `?rnd=${Umbraco.Sys.ServerVariables.application.cacheBuster}`; 
 
             // Init value
             if (scope.value && scope.value.contentType) scope.value = [scope.value];
