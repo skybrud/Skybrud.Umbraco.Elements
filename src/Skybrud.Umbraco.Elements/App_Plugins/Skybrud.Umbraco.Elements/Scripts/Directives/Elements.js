@@ -3,7 +3,7 @@
     // https://stackoverflow.com/a/2117523
     function uuidv4() {
         return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-            var r = Math.random() * 16 | 0, v = c === "x" ? r : (r & 0x3 | 0x8);
+            const r = Math.random() * 16 | 0, v = c === "x" ? r : (r & 0x3 | 0x8);
             return v.toString(16);
         });
     }
@@ -296,7 +296,7 @@
                 if (item.contentType.nameExp) {
 
                     item.value.properties["$index"] = index + 1;
-                    var newName = item.contentType.nameExp(item.value.properties);
+                    let newName = item.contentType.nameExp(item.value.properties);
                     if (newName && (newName = $.trim(newName))) {
                         name = newName;
                     }
