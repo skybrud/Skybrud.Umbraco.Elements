@@ -6,7 +6,7 @@ using Umbraco.Core.Composing;
 
 namespace Skybrud.Umbraco.Elements.Composers {
     
-    [RuntimeLevel(MinLevel = RuntimeLevel.Upgrade)]
+    [RuntimeLevel(MinLevel = RuntimeLevel.Install)]
     public class ElementsComposer : IUserComposer {
 
         public void Compose(Composition composition) {
